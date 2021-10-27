@@ -1,0 +1,10 @@
+
+PDF:
+  Size: Letter
+  Orientation: Landscape
+
+
+Templates:
+  invest:
+    end_point: 'http://localhost:3000/invest'
+    template_loc: 'invest.html'

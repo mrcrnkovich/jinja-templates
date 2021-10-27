@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+{% for pship, items in data|groupby("pship") %}
+<table class="table table-striped">
+    <thead>
+      <tr scope="span">
+        <th>Partnership: {{pship|title}}</th>
+      </tr>
+      <tr>
+        <th scope="col" class="col-2 text-right">Effective Date</th>
+        <th scope="col" class="col text-right">Net Capital</th>
+        <th scope="col" class="col text-right">Ending Capital</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for row in items|sort(attribute="eff_date") %}
+        <tr>
+          <td class="text-right">{{ row.eff_date }}</td>
+          <td class="text-right">{{ "{:,}".format(row.income|int) }}</td>
+          <td class="text-right">{{ "{:,}".format(row.expense|int) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+</div>
+</br>
+{% endblock content %}

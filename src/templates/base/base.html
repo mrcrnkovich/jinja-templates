@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="pdfkit-quiet" content="">
+    <meta name="pdfkit-page-size" content="Letter">
+    <meta name="pdfkit-orientation" content="Landscape">
+    <meta name="pdfkit-margin-top" content="18mm">
+    <meta name="pdfkit-margin-bottom" content="15mm">
+    <meta name="pdfkit-margin-left" content="10mm">
+    <meta name="pdfkit-margin-right" content="10mm">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+        .table tbody tr:nth-child(odd){background:CCC}
+    </style>
+</head>
+<body>
+    {% block body %}
+    {% block title %}
+        {% include "base/title.html" %}
+    {% endblock title %}
+    {% block content %}
+    {% endblock content %}
+    {% block footer %}
+        {% include "base/footer.html" %}
+    {% endblock footer %}
+    {% endblock body %}
+</body>
+</html>
