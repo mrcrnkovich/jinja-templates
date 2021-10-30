@@ -2,6 +2,7 @@ CC=python3
 
 template_dir = ./make_pdf/templates
 templates = $(shell ls $(template_dir))
+output_dir = ./output
 
 .PHONY: help
 help: ## Show this help
@@ -23,6 +24,12 @@ install:
 
 initial: env install
 
+clean:	## empy the output folder
+	rm -rf $(output_dir)/*.pdf
+
+
 %: ## where the magic happens
-	$(CC) main.py $@ \
-	&& open template.pdf
+	$(CC) main.py $@
+
+all: invest capital #make all reports
+	open output/invest.pdf $(output_dir)/capital.pdf

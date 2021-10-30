@@ -1,10 +1,13 @@
-
 PDF:
-  Size: Letter
-  Orientation: Landscape
+  encoding: 'UTF-8'
+  size: 'Letter'
+  orientation: 'Landscape'
 
 
 Templates:
   invest:
     end_point: 'http://localhost:3000/invest'
     template_loc: 'invest.html'
+  capital:
+    end_point: 'http://localhost:3000/capital'
+    template_loc: 'capital.html'
