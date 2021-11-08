@@ -1,3 +1,5 @@
+{% from "macros/macros.html" import title, footer %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +11,12 @@
 <body>
     {% block body %}
     {% block title %}
-        {% include "base/title.html" %}
+        {{title(name, report)}}
     {% endblock title %}
     {% block content %}
     {% endblock content %}
     {% block footer %}
-        {% include "base/footer.html" %}
+        {{footer(report)}}
     {% endblock footer %}
     {% endblock body %}
 </body>
