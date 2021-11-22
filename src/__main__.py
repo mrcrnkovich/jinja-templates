@@ -1,29 +1,32 @@
 #! /usr/local/bin/python3
 
-import pdfkit
+import logging
 import jinja2
-import requests
-import sys
+from sys import argv
 from yaml import safe_load
+from pdfkit import from_string
 
-config_filepath = './config.yml'
 
 def trim(path):
     return path.strip('./').strip('.py')
 
-def pdf_filename(report, output_dir='output'):
+def pdf_filename(report, output_dir='./output'):
     return output_dir+'/'+report+'.pdf'
 
 def get_data(path):
-    return requests.get(path).json()
+    from requests import get
+    return get(path).json()
 
 def main():
-    
-    # Load commandline args
-    report = trim(sys.argv[1])
+    logging.basicConfig(filename="./app.log", level=logging.INFO)
 
+
+    # Load commandline args
+    report = trim(argv[1])
     
+    logging.info(f'opening file {report}')
     # Load template configurations
+    config_filepath = './config.yml'
     with open (config_filepath, 'r') as f:
         config = safe_load(f)
 
@@ -43,7 +46,7 @@ def main():
             data=get_data(report_url))
 
     # Render to PDF
-    pdfkit.from_string(html,
+    from_string(html,
             pdf_filename(report),
             options=config.get('PDF'))
 

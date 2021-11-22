@@ -1,4 +1,4 @@
-CC=python3
+CC='pipenv run python3'
 
 template_dir = ./make_pdf/templates
 templates = $(shell ls $(template_dir))
@@ -29,7 +29,7 @@ clean:	## empy the output folder
 
 
 %: ## where the magic happens
-	$(CC) main.py $@
+	pipenv run python3 -m src $@
 
 all: invest capital #make all reports
 	open output/invest.pdf $(output_dir)/capital.pdf

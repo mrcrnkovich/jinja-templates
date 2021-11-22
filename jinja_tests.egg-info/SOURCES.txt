@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+setup.py
+jinja_tests.egg-info/PKG-INFO
+jinja_tests.egg-info/SOURCES.txt
+jinja_tests.egg-info/dependency_links.txt
+jinja_tests.egg-info/top_level.txt
+src/__init__.py
