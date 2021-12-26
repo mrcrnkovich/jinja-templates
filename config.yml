@@ -14,3 +14,11 @@ Templates:
   capital:
     end_point: 'http://localhost:3000/capital'
     template_loc: 'capital.html'
+  car_accidents_phl:
+    end_point: '''https://phl.carto.com/api/v2/sql?q=
+               SELECT%20crash_year,%20sum(fatal_count)
+               %20AS%20fatal,
+               %20sum(injury_count)
+               %20AS%20injury%20FROM%20crash_data_collision_crash_2007_2017
+               %20GROUP%20BY%201'''
+    template_loc: ''
