@@ -5,22 +5,16 @@ import jinja2
 from sys import argv
 from yaml import safe_load
 from pdfkit import from_string
+from .get_data import api_data
 
 
 def pdf_filename(report: str, output_dir: str = './output') -> str:
     return output_dir+'/'+report+'.pdf'
 
-
-def get_data(path: str) -> dict:
-    '''Takes https path and returns results in a dict'''
-    from requests import get
-    result = get(path)
-    return result.json() if result.status_code == '200' else raise AttributeError
-
-
 def main():
     logging.basicConfig(filename="./app.log", level=logging.INFO)
-
+    
+    print_to_pdf = argv[-1] == '--print-to-pdf'
     report = argv[1].strip('./').strip('.py')
     logging.info(f'opening file {report}')
 
@@ -37,13 +31,18 @@ def main():
             loader=jinja2.PackageLoader("src"),
             autoescape=jinja2.select_autoescape()
     )
+
     template = env.get_template(template_name)
+    data = api_data(report_url)
+
     html = template.render(name="mike",
             report=report,
-            data=get_data(report_url))
+            data=data)
 
-    # Render to PDF
-    from_string(html,
+    print(html)
+    
+    if print_to_pdf:
+        from_string(html,
             pdf_filename(report),
             options=config.get('PDF'))
 

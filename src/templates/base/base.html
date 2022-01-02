@@ -3,12 +3,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <style>
-        .table tbody tr:nth-child(odd){background:CCC}
-    </style>
+    <meta charset="UTF-8">
+    {% block script %}
+        <script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>
+    {% endblock script %}
+    
+    {% block style %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <style>
+            body {padding: 2em; height: 100vh;}
+            .table tbody tr:nth-child(odd){background: rgba(0,0,0,0.08);
+                border-radius: 2rem;}
+            aside {
+                border-radius: 2rem;
+                background: rgba(0,0,0,0.08);
+                padding: 2rem;
+                margin:2rem;
+            }
+        </style>
+    {% endblock style %}
 </head>
-<body>
+<body onload="onPageLoad()">
     {% block body %}
     {% block title %}
         {{title(name, report)}}
@@ -19,5 +34,9 @@
         {{footer(report)}}
     {% endblock footer %}
     {% endblock body %}
+    <script type="text/javascript">
+        {% block javascript %}
+        {% endblock javascript %}
+    </script>
 </body>
 </html>

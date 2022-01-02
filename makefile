@@ -31,5 +31,6 @@ clean:	## empy the output folder
 %: ## where the magic happens
 	pipenv run python3 -m src $@
 
+
 all: invest capital #make all reports
 	open output/invest.pdf $(output_dir)/capital.pdf
