@@ -23,16 +23,24 @@
         </style>
     {% endblock style %}
 </head>
-<body onload="onPageLoad()">
+<body class="container" onload="onPageLoad()">
     {% block body %}
-    {% block title %}
-        {{title(name, report)}}
-    {% endblock title %}
-    {% block content %}
-    {% endblock content %}
-    {% block footer %}
-        {{footer(report)}}
-    {% endblock footer %}
+    <div class="col">
+        <header class="container-fluid mb-4 border-bottom border-secondary">
+        {% block title %}
+            {{title(name, report)}}
+        {% endblock title %}
+        </header>
+        <main class="container">
+        {% block content %}
+        {% endblock content %}
+        </main>
+        <footer class="container-fluid mt-1 border-top border-secondary">
+        {% block footer %}
+            {{footer(report)}}
+        {% endblock footer %}
+        </footer>
+    </div>
     {% endblock body %}
     <script type="text/javascript">
         {% block javascript %}

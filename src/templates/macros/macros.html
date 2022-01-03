@@ -1,14 +1,13 @@
 
 {% macro title(name, report) -%}
-<div class="container-fluid mb-4 border-bottom border-secondary">
+  <div>
     <h1> {{ name|capitalize }} </h1>
     <h3 class="text-muted"> {{ report|capitalize }} </h3>
-</div>
+  </div>
 {%- endmacro %}
 
 
 {% macro footer(report) -%}
-<div class="container-fluid mt-1 border-top border-secondary">
   <div class="row">
     <div class="col">
       <a class="text-muted"> {{ report|capitalize }} </a>
@@ -17,5 +16,4 @@
       <a class="text-muted"> All Rights Reserved </a>
     </div>
   </div>
-</div>
 {%- endmacro %}

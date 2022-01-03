@@ -16,7 +16,9 @@ def main():
     
     print_to_pdf = argv[-1] == '--print-to-pdf'
     report = argv[1].strip('./').strip('.py')
+    
     logging.info(f'opening file {report}')
+    logging.info(f'output is {print_to_pdf}')
 
     config_filepath = './config.yml'
     with open(config_filepath, 'r') as f:

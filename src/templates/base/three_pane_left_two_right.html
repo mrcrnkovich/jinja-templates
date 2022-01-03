@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-md-4">
+        {% block left %}
+        {% endblock %}
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+            {% block top %}
+            {% endblock %}
+        </div>
+        <div class="row">
+            {% block bottom %}
+            {% endblock %}
+        </div>
+      </div>
+    </div>
+</br>
+{% endblock content %}

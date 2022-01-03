@@ -1,12 +1,12 @@
 {% from "js/plotly_chart.js" import plotly_chart %}
 
-{% extends "base/three_pane_top_two_bottom.html" %}
+{% extends "base/three_pane_left_two_right.html" %}
 
-{% block bottom_right %}
+{% block bottom %}
     <div id="graphDiv" style="min-width:800px"></div>
 {% endblock %}
 
-{% block bottom_left %}
+{% block top %}
     <aside>
         <h3>Data from 2011 - 2017</h3>
         <p>This is data from Open Data PHL, for car and bike accidents
@@ -15,7 +15,7 @@
     </aside>
 {% endblock %}
 
-{% block top %}
+{% block left %}
     <table class="table table-striped">
         <thead>
             <tr scope="span">

@@ -59,7 +59,7 @@
     
     function onPageLoad(){
         let graphData = {{ data|tojson }};
-            Plotly.newPlot("graphDiv", map_data(graphData.rows),
+            Plotly.newPlot("graphDiv", map_data(graphData),
                     {displayModeBar:false});
     }
 {%- endmacro %}
