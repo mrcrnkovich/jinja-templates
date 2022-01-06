@@ -38,13 +38,17 @@ reports:
       location: car_accidents.html
   cars_phl_sql:
     data:
-      source_type: sqlite
-      source:     './tmp/phl_crash_data.db'
-      query: >-
-        select crash_year,
-          fatal,
-          injury,
-          bike_crash
-        from crash_by_year
+      - name: sql 
+        source_type: sqlite
+        source:     './tmp/phl_crash_data.db'
+        query: >-
+          select crash_year,
+            fatal,
+            injury,
+            bike_crash
+          from crash_by_year
+      - name: text
+        source_type: text
+        source: "This is data from 2011 to 2017."
     template:
       location: car_accidents_v2.html

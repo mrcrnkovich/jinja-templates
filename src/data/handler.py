@@ -1,5 +1,5 @@
 from .api import api_data
-from .sqlite import call_sqlite
+from .sqlite import get_query 
 
 def fn1(source_type, source, query=None, name=None):
     ''' Takes data_type, source, optional query
@@ -11,7 +11,9 @@ def fn1(source_type, source, query=None, name=None):
         return api_data(source)
     elif source_type == 'sqlite':
         print('hanlder is sql')
-        return call_sqlite
+        return get_query(source, query)
+    elif source_type == 'text':
+        return source
     else:
         return 'data type not currently supported'
 
@@ -27,6 +29,6 @@ def handler(data):
         print('data_type is dict')
         return fn1(**data)
     elif type(data) == list:
-        return {i.name: fn1(*i) for i in data}
+        return {i['name']: fn1(**i) for i in data}
     else:
         return
