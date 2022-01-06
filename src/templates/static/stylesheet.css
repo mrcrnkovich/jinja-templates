@@ -1,0 +1,17 @@
+            
+body {
+    padding: 2em;
+    min-height: 100vh;
+}
+            
+.table tbody tr:nth-child(odd){
+    background: rgba(0,0,0,0.08);
+    border-radius: 2rem;
+}
+
+aside {
+    border-radius: 2rem;
+    background: rgba(0,0,0,0.08);
+    padding: 2rem;
+    margin:2rem;
+}
