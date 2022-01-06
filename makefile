@@ -29,7 +29,7 @@ clean:	## empy the output folder
 
 
 %: ## where the magic happens
-	@python3 -m src $@ > $(output_dir)/$@.pdf
+	@python3 -m src $@
 
 
 all: invest capital #make all reports

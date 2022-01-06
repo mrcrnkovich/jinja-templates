@@ -1,12 +1,11 @@
 #! /usr/local/bin/python3
-
 import os
 import logging
 import jinja2
 from sys import argv
 from yaml import safe_load
 from pdfkit import from_string
-from .helpers import api_data
+from .data import handler
 
 
 def test_dir(path):
@@ -38,14 +37,11 @@ def main():
     logging.info(f'opening file {report}')
     logging.info(f'pdf output is {print_to_pdf}')
 
+    # Load Config from file
     if not os.path.exists(config_filepath):
         logging.fatal("No Config File Found")
     with open(config_filepath, 'r') as f:
         config = safe_load(f)
-
-    template_config = config.get('reports').get(report)
-    template_name = template_config.get('template').get('location')
-    report_url = template_config.get('data').get('source')
 
     # set up Jinja environment
     env = jinja2.Environment(
@@ -53,19 +49,24 @@ def main():
             autoescape=jinja2.select_autoescape()
     )
 
+    report_config = config.get('reports').get(report)
+    template_name = report_config.get('template').get('location')
+    report_data = report_config.get('data')
     template = env.get_template(template_name)
-    data = api_data(report_url)
+    print(report_data)
+    data = handler.handler(report_data)
 
     html = template.render(name="mike",
             report=report,
             data=data)
 
-    print(html)
+    with open(output_base_path+'/'+report+'.html', 'w') as f:
+        f.write(html)
     
     if print_to_pdf:
         from_string(html,
             pdf_filename,
-            options=config.get('PDF'))
+            options=config.get('pdf'))
 
 
 if __name__ == "__main__":

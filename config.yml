@@ -12,19 +12,19 @@ pdf:
 reports:
   invest:
     data:
-      type:     'api'
+      source_type:     'api'
       source:   'http://localhost:3000/invest'
     template:
       location: 'invest.html'
   capital:
     data:
-      type:     'api'
+      source_type:     'api'
       source:   'http://localhost:3000/capital'
     template:
       location: 'capital.html'
-  cars_v1_phl:
+  cars_phl_api:
     data:
-      type: api
+      source_type: api
       name: car_accident_phl
       source: >-
         https://phl.carto.com/api/v2/sql?q=
@@ -38,8 +38,13 @@ reports:
       location: car_accidents.html
   cars_phl_sql:
     data:
-      type:       'sqlite'
+      source_type: sqlite
       source:     './tmp/phl_crash_data.db'
-      query:      'select * from crash_by_year'
+      query: >-
+        select crash_year,
+          fatal,
+          injury,
+          bike_crash
+        from crash_by_year
     template:
-      location:   'car_accidents_v2.html'
+      location: car_accidents_v2.html
