@@ -38,7 +38,7 @@ reports:
       location: car_accidents.html
   cars_phl_sql:
     data:
-      - name: sql 
+      - name: table 
         source_type: sqlite
         source:     './tmp/phl_crash_data.db'
         query: >-
@@ -48,7 +48,11 @@ reports:
             bike_crash
           from crash_by_year
       - name: text
-        source_type: text
-        source: "This is data from 2011 to 2017."
+        source_type: sqlite
+        source: './tmp/phl_crash_data.db'
+        query: >-
+          select comments
+          from commentary
+          where id like '2011-2017'
     template:
       location: car_accidents_v2.html

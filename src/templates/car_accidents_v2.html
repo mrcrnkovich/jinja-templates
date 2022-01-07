@@ -8,10 +8,9 @@
 {% block top %}
     <aside>
         <h3>Data from 2011 - 2017</h3>
-        <p>{{data['text']}}</p>
-        <p>This is data from Open Data PHL, for car and bike accidents
-        between 2011 and 2017. I could include some other info as well, but I'm
-        just writing to take up space at the moment.</p>
+        {% for row in data.text %}
+            <p>{{ row.comments }}</p>
+        {% endfor %}
     </aside>
 {% endblock %}
 
@@ -29,7 +28,7 @@
            </tr>
         </thead>
         <tbody>
-            {% for row in data['sql']|sort(attribute="crash_year") %}
+            {% for row in data.table|sort(attribute="crash_year") %}
               <tr>
                 <td class="text-left">{{row.crash_year}}</td>
                 <td class="text-right">{{row.fatal}}</td>
@@ -42,5 +41,5 @@
 {% endblock%}
 
 {% block javascript %}
-    {{ plotly_chart(data['sql']) }}
+    {{ plotly_chart(data.table) }}
 {% endblock javascript %}
