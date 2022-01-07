@@ -5,7 +5,7 @@ import jinja2
 import argparse
 from yaml import safe_load
 from pdfkit import from_string
-from .data import handler
+from data import handler
 
 
 def dir_exists(path):
@@ -40,14 +40,15 @@ def cli_arguments():
 
 
 def main():
-    logging.basicConfig(filename=f"{dir_exists('./logs')}/app.log", level=logging.INFO)
+    logging.basicConfig(filename=f"{dir_exists('../logs')}/app.log", level=logging.INFO)
 
     check_dependencies()
     args = cli_arguments()
 
-    config_path = "./config.yml"
-    output_path = dir_exists("./output")
-    reports_path = dir_exists("./reports")
+    config_path = "../../config.yml"
+    output_path = dir_exists("../output")
+    reports_path = dir_exists("../reports")
+    templates_path = dir_exists("../templates")
 
     # set up command line options
 
@@ -72,19 +73,22 @@ def main():
     
     # set up Jinja environment
     env = jinja2.Environment(
-        loader=jinja2.PackageLoader("app"), autoescape=jinja2.select_autoescape()
+        loader=jinja2.FileSystemLoader(templates_path),
+                autoescape=jinja2.select_autoescape()
     )
 
-    # report_config = config.get("reports").get(args.report)
     template_name = report_config.get("template").get("location")
     report_data = handler.handler(report_config.get("data"))
     template = env.get_template(template_name)
 
-    html = template.render(name="mike", report=args.report, data=report_data)
+    html = template.render(name="mike", report=report_config.get('name',
+        args.report), data=report_data)
 
     if args.html:
         with open(f"{output_path}/{args.report}.html", "w") as f:
             f.write(html)
+    else:
+        print(html)
 
     if args.pdf:
         from_string(html, f"{output_path}/{args.report}.pdf", options=config.get("pdf"))
