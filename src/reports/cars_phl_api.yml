@@ -1,0 +1,15 @@
+report:
+    name: Cars PHL API
+    data:
+      id: car_accident_phl
+      source_type: api
+      source: >-
+        https://phl.carto.com/api/v2/sql?q=
+        SELECT%20crash_year,
+        %20sum(fatal_count)%20AS%20fatal,
+        %20sum(injury_count)%20AS%20injury,
+        %20sum(bicycle_count)%20as%20bike_crash
+        %20FROM%20crash_data_collision_crash_2007_2017%20
+        %20GROUP%20BY%201
+    template:
+      location: car_accidents.html
