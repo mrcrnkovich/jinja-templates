@@ -1,9 +1,9 @@
 report:
-    name: Cars Phl SQL
+    name: "Car Accidents in PHL from 2011 to 2017"
     data:
       - id: table 
         source_type: sqlite
-        source:     './tmp/phl_crash_data.db'
+        source:     './data/phl_crash_data.db'
         query: >-
           select crash_year,
             fatal,
@@ -12,7 +12,7 @@ report:
           from crash_by_year
       - id: text
         source_type: sqlite
-        source: './tmp/phl_crash_data.db'
+        source: './data/phl_crash_data.db'
         query: >-
           select comments
           from commentary

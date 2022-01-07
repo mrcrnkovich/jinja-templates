@@ -7,7 +7,6 @@ def api_data(path: str) -> dict:
 
     logging.info(f"API PATH: {path}")
     result = get(path)
-    print(result)
 
     if result.status_code == 200:
         return result.json()
