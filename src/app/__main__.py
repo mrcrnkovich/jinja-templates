@@ -9,16 +9,16 @@ from data import handler
 
 
 def dir_exists(path):
-    ''' Checks whether a directory exists.
-        If directory is not found, create the directory.
-    '''
+    """Checks whether a directory exists.
+    If directory is not found, create the directory.
+    """
     if not os.path.exists(path):
         os.mkdir(path)
     return path
 
 
 def check_dependencies():
-    ''' Check for required non-python dependencies.'''
+    """Check for required non-python dependencies."""
     import subprocess
 
     if subprocess.call(["which", "wkhtmltopdf"], stdout=subprocess.DEVNULL) != 0:
@@ -29,13 +29,16 @@ def check_dependencies():
 
 def cli_arguments():
     arg_parser = argparse.ArgumentParser(
-        description="A static report generator based on Jinja")
+        description="A static report generator based on Jinja"
+    )
 
     arg_parser.add_argument("report", help="specify which report to run")
-    arg_parser.add_argument("--pdf", help="print a pdf to output_path",
-            action="store_true")
-    arg_parser.add_argument("--html", help="print html to output_path",
-            action="store_true")
+    arg_parser.add_argument(
+        "--pdf", help="print a pdf to output_path", action="store_true"
+    )
+    arg_parser.add_argument(
+        "--html", help="print html to output_path", action="store_true"
+    )
     return arg_parser.parse_args()
 
 
@@ -67,22 +70,23 @@ def main():
     try:
         with open(f"{reports_path}/{args.report}.yml", "r") as f:
             report_config = safe_load(f).get("report")
-    except: #raise exception
+    except:  # raise exception
         logging.fatal("No report configuration found")
         exit()
-    
+
     # set up Jinja environment
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(templates_path),
-                autoescape=jinja2.select_autoescape()
+        autoescape=jinja2.select_autoescape(),
     )
 
     template_name = report_config.get("template")
     report_data = handler.handler(report_config.get("data"))
     template = env.get_template(template_name)
 
-    html = template.render(name="mike", report=report_config.get('title',
-        args.report), data=report_data)
+    html = template.render(
+        name="mike", report=report_config.get("title", args.report), data=report_data
+    )
 
     if args.html:
         with open(f"{output_path}/{args.report}.html", "w") as f:
