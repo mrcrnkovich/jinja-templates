@@ -77,11 +77,11 @@ def main():
                 autoescape=jinja2.select_autoescape()
     )
 
-    template_name = report_config.get("template").get("location")
+    template_name = report_config.get("template")
     report_data = handler.handler(report_config.get("data"))
     template = env.get_template(template_name)
 
-    html = template.render(name="mike", report=report_config.get('name',
+    html = template.render(name="mike", report=report_config.get('title',
         args.report), data=report_data)
 
     if args.html:
