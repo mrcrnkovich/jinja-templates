@@ -1,22 +1,33 @@
-# Jinja Wrapper to compile documents
+# HTML/PDF Report Generator
 
 ## About
 
-This Jinja wrapper designed to compile static reports, documents, or even be
+This a HTML/PDF report generator written in Python. By utilizing Jinja2
+templates, it is easy to compile static reports, documents, or even be
 used as a static HTML generator. It was originally conceived as a way to
 generate PDF reports from command line script by using HTML for the template.
 
-Report layouts are basic HTML, CSS, and Javascript. The report configurations
-are setup in a YAML configuration file. In the YAML file you define the
-end-points where data should be retrieved.
+Report layouts are basic HTML, CSS, and Javascript. The report configurations,
+including data sources, are setup in a YAML configuration file.
 
-## Options
-`--print-to-pdf: Prints the report to output/[report-name].pdf`
- This is dependent on wkhtmltopdf being installed on your system
-`--stdin: read data from standard in. Used with --template`
-`--template: define a template to be used, do not look in the config.yml file`
+Currently, you can choose multiple data sources in the configuration, from
+SQLite, Text, and API endpoints.
+
+This project aims to fill the gap for easy to use report generators, that can
+fit easily into any current workflow. Since it's a command line program, it can
+be incorporated into a Airflow routine, to be run after a batch data load.
+
 
 ## Usage
+
+## Options
+
+`--print-to-pdf: Prints the report to output/[report-name].pdf`
+ This is dependent on wkhtmltopdf being installed on your system
+ --to-file: Prints results to file at output/[report-name]
+ --stdout: Prints results to standard out. This is the default.
+`--stdin: read data from standard in. Used with --template`
+`--template: define a template to be used, do not look in the config.yml file`
 
 ### Default Templates
 There are three default templates included
