@@ -9,6 +9,8 @@ pyyaml = "*"
 pdfkit = "*"
 requests = "*"
 pytest = "*"
+pylint = "*"
+black = "*"
 
 [dev-packages]
 

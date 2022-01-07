@@ -1,0 +1,20 @@
+report:
+    title: "Car Accidents in PHL from 2011 to 2017"
+    template: car_accidents_v2.html
+    data:
+      - id: table 
+        source_type: sqlite
+        source:     '../data/phl_crash_data.db'
+        query: >-
+          select crash_year,
+            fatal,
+            injury,
+            bike_crash
+          from crash_by_year
+      - id: text
+        source_type: sqlite
+        source: '../data/phl_crash_data.db'
+        query: >-
+          select comments
+          from commentary
+          where id like '2011-2017'
