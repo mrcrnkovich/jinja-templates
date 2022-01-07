@@ -18,6 +18,13 @@ end-points where data should be retrieved.
 
 ## Usage
 
+### Default Templates
+There are three default templates included
+with the package:
+    1. Three panes (Top , bottom_left, bottm_right)
+    2. Three panes (Left, top_right, bottom_right)
+
+
 ### config.yml
 
 Define API endpoint

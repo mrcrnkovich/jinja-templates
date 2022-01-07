@@ -29,7 +29,7 @@ clean:	## empy the output folder
 
 
 %: ## where the magic happens
-	pipenv run python3 -m src $@
+	@python3 -m src $@
 
 
 all: invest capital #make all reports
