@@ -1,8 +1,14 @@
 #! /usr/local/bin/python3
-import os
-import logging
-import jinja2
+""" Currently the main module that runs everything.
+    Need to refactor.
+"""
+
 import argparse
+import os
+import sys
+import logging
+import subprocess
+import jinja2
 from yaml import safe_load
 from pdfkit import from_string
 from data import handler
@@ -19,7 +25,6 @@ def dir_exists(path):
 
 def check_dependencies():
     """Check for required non-python dependencies."""
-    import subprocess
 
     if subprocess.call(["which", "wkhtmltopdf"], stdout=subprocess.DEVNULL) != 0:
         logging.critical("WKHTMLTOPDF not found, can not print to PDF")
@@ -28,6 +33,9 @@ def check_dependencies():
 
 
 def cli_arguments():
+    """Add cli args to argpase:
+    return results
+    """
     arg_parser = argparse.ArgumentParser(
         description="A static report generator based on Jinja"
     )
@@ -43,6 +51,7 @@ def cli_arguments():
 
 
 def main():
+    """Runs Main"""
     logging.basicConfig(filename=f"{dir_exists('../logs')}/app.log", level=logging.INFO)
 
     check_dependencies()
@@ -55,24 +64,24 @@ def main():
 
     # set up command line options
 
-    logging.info(f"opening file {args.report}")
-    logging.info(f"pdf output is {args.pdf}")
+    logging.info("opening file %s", args.report)
+    logging.info("pdf output is %s", args.pdf)
 
     # Load Application Config from file
     try:
-        with open(config_path, "r") as f:
-            config = safe_load(f)
+        with open(config_path, "r", encoding="UTF-8") as file:
+            config = safe_load(file)
     except:
         logging.fatal("No Config File Found")
-        exit()
+        sys.exit()
 
     # Load Report Config from file
     try:
-        with open(f"{reports_path}/{args.report}.yml", "r") as f:
-            report_config = safe_load(f).get("report")
+        with open(f"{reports_path}/{args.report}.yml", "r", encoding="UTF-8") as file:
+            report_config = safe_load(file).get("report")
     except:  # raise exception
         logging.fatal("No report configuration found")
-        exit()
+        sys.exit()
 
     # set up Jinja environment
     env = jinja2.Environment(
@@ -89,8 +98,8 @@ def main():
     )
 
     if args.html:
-        with open(f"{output_path}/{args.report}.html", "w") as f:
-            f.write(html)
+        with open(f"{output_path}/{args.report}.html", "w", encoding="UTF-8") as file:
+            file.write(html)
     else:
         print(html)
 

@@ -1,14 +1,23 @@
+""" Module makes a request to an API and returns a Dict with the
+    results
+"""
+
 import logging
+from typing import Dict
+from requests import get
 
 
-def api_data(path: str) -> dict:
+def api_data(path: str) -> Dict:
     """Takes https path and returns results in a dict"""
-    from requests import get
 
-    logging.info(f"API PATH: {path}")
+    logging.info("API PATH: %s", path)
     result = get(path)
 
     if result.status_code == 200:
-        return result.json()
+        results = result.json()
     else:
-        logging.ERROR(f"failed to get data at {path}. Returned: {result.status_code}")
+        logging.error(
+            "failed to get data at %s. Returned: %s", path, result.status_code
+        )
+        results = {"result": None}
+    return results
