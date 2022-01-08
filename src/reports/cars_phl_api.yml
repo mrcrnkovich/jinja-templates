@@ -2,9 +2,9 @@ report:
     title: Cars PHL API
     template: car_accidents.html
     data:
-      id: car_accident_phl
+      source_id: car_accident_phl
       source_type: api
-      source: >-
+      source_path: >-
         https://phl.carto.com/api/v2/sql?q=
         SELECT%20crash_year,
         %20sum(fatal_count)%20AS%20fatal,
