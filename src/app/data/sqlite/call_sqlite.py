@@ -1,3 +1,9 @@
+"""
+Executes a SQL query against a sqlite3 database.
+Returns a list of rows, represented as a dict
+where key = column_name
+"""
+
 import sqlite3
 
 
