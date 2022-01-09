@@ -8,3 +8,4 @@ pdf:
   margin-right:     '10mm'
   no-stop-slow-scripts: True
   javascript-delay: '5000'
+  enable-local-file-access: True
