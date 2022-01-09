@@ -45,6 +45,9 @@ def cli_arguments():
 
     arg_parser.add_argument("report", help="specify which report to run")
     arg_parser.add_argument(
+        "--dev", help="run reports, logs, output in dev mode",
+        action="store_true")
+    arg_parser.add_argument(
         "--pdf", help="print a pdf to output_path", action="store_true"
     )
     arg_parser.add_argument(
@@ -55,16 +58,24 @@ def cli_arguments():
 
 def main():
     """Runs Main"""
-
-    logging.basicConfig(filename=f"{dir_exists('./logs')}/app.log", level=logging.INFO)
-
-    check_dependencies()
+    
     args = cli_arguments()
-
     config_path = "../config.yml"
-    output_path = dir_exists("./output")
-    reports_path = dir_exists("./reports")
-    templates_path = dir_exists("./templates")
+    
+    if args.dev:
+        log_path = dir_exists("./logs")
+        output_path = dir_exists("./output")
+        reports_path = dir_exists("./reports")
+        templates_path = dir_exists("./templates")
+    else:
+        log_path = dir_exists("/var/log/app/")
+        output_path = dir_exists("/var/opt/output")
+        reports_path = dir_exists("/var/opt/reports")
+        templates_path = dir_exists("/var/opt/templates")
+
+
+    logging.basicConfig(filename=f"{log_path}/app.log", level=logging.INFO)
+    check_dependencies()
 
     # set up command line options
 
