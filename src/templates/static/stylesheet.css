@@ -1,4 +1,4 @@
-            
+{% macro user_style() -%}
 body {
     padding: 2em;
     min-height: 100vh;
@@ -15,3 +15,10 @@ aside {
     padding: 2rem;
     margin:2rem;
 }
+@media print {
+    svg {
+        page-break-after: always;
+    }
+
+}
+{%- endmacro %}

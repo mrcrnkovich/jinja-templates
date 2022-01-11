@@ -15,7 +15,6 @@
 {% endblock %}
 
 {% block left %}
-    {% for row in data.table|sort(attribute="crash_year") %}
     <table class="table table-striped">
         <thead>
             <tr scope="span">
@@ -29,15 +28,16 @@
            </tr>
         </thead>
         <tbody>
+            {% for row in data.table|sort(attribute="crash_year") -%}
               <tr>
                 <td class="text-left">{{row.crash_year}}</td>
                 <td class="text-right">{{row.fatal}}</td>
                 <td class="text-right">{{row.bike_crash}}</td>
                 <td class="text-right">{{ "{:,.0f}".format(row.injury)}}</td>
               </tr>
+            {%- endfor %}
         </tbody>
     </table>
-    {% endfor %}
 {% endblock%}
 
 {% block javascript %}

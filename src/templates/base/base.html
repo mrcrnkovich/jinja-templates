@@ -1,4 +1,5 @@
 {%- from "macros/macros.html" import title, footer -%}
+{%- from "static/stylesheet.css" import user_style -%}
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,9 @@
     {%- endblock script %}
     {% block style -%}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-        <link rel="stylesheet" href="src/templates/static/stylesheet.css">
+        <style>
+            {{user_style()}}
+        </style>
     {%- endblock style %}
 </head>
 <body class="container" onload="onPageLoad()">

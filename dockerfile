@@ -20,4 +20,4 @@ RUN pip install --upgrade pip &&\
     pip install jinja2 pyyaml requests pdfkit
 
 WORKDIR src
-CMD python app.py cars_phl_api --html --pdf
+CMD ls /var/opt/reports | xargs -n 1 basename -s .yml | xargs -n 1 python app.py --html --pdf

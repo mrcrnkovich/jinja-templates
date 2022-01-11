@@ -1,5 +1,5 @@
-""" Module makes a request to an API and returns a Dict with the
-    results
+"""
+Module makes a request to an API and returns a Dict with the results
 """
 
 import logging
