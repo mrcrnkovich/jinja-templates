@@ -44,8 +44,8 @@ def cli_arguments():
 
     arg_parser.add_argument("report", help="specify which report to run")
     arg_parser.add_argument(
-        "--dev", help="run reports, logs, output in dev mode",
-        action="store_true")
+        "--dev", help="run reports, logs, output in dev mode", action="store_true"
+    )
     arg_parser.add_argument(
         "--pdf", help="print a pdf to output_path", action="store_true"
     )
@@ -53,6 +53,7 @@ def cli_arguments():
         "--html", help="print html to output_path", action="store_true"
     )
     return arg_parser.parse_args()
+
 
 def app_config(config_path):
     # Load Application Config from file
@@ -67,11 +68,11 @@ def app_config(config_path):
 
 def main():
     """Runs Main"""
-    
+
     args = cli_arguments()
     config_path = "../config.yml"
     config = app_config(config_path)
-    
+
     if args.dev:
         log_path = dir_exists("./logs")
         output_path = dir_exists("./output")
@@ -83,10 +84,9 @@ def main():
         reports_path = dir_exists("/var/opt/reports")
         templates_path = dir_exists("/var/opt/templates")
 
-
     logging.basicConfig(filename=f"{log_path}/app.log", level=logging.INFO)
     check_dependencies()
-    
+
     logging.info("opening file %s", args.report)
     logging.info("pdf output is %s", args.pdf)
 
@@ -96,14 +96,15 @@ def main():
         autoescape=jinja2.select_autoescape(),
     )
 
-    create_report(env=env,
-                output_path=output_path,
-                reports_path=reports_path,
-                report=args.report,
-                print_to_pdf= args.pdf,
-                print_to_html = args.html,
-                pdf_base_config = config.get("pdf")
-                )
+    create_report(
+        env=env,
+        output_path=output_path,
+        reports_path=reports_path,
+        report=args.report,
+        print_to_pdf=args.pdf,
+        print_to_html=args.html,
+        pdf_base_config=config.get("pdf"),
+    )
 
 
 if __name__ == "__main__":

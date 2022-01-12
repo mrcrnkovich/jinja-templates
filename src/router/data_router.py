@@ -1,11 +1,11 @@
-""" 
+"""
 Takes a single dict or a list of dicts representing
 the data instructions from the [report].yml file
 """
 
 import logging
-from api import api_data
-from sqlite import get_query
+from .api import api_data
+from .sqlite import get_query
 
 
 def fn1(source_type: str, source_path: str, query: str = None, source_id=None):
