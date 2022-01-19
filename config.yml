@@ -1,11 +1,11 @@
 pdf:
-  encoding:         'UTF-8'
-  page-size:        'Letter'
-  orientation:      'Landscape'
-  margin-top:       '18mm'
-  margin-bottom:    '15mm'
-  margin-left:      '10mm'
-  margin-right:     '10mm'
+  encoding: 'UTF-8'
+  page-size: 'Letter'
+  orientation: 'Landscape'
+  margin-top: '18mm'
+  margin-bottom: '15mm'
+  margin-left: '10mm'
+  margin-right: '10mm'
   no-stop-slow-scripts: True
   javascript-delay: '5000'
   enable-local-file-access: True
