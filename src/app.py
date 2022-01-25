@@ -1,8 +1,6 @@
 #! /usr/local/bin/python3
 
-"""
-Currently the main module that runs everything.
-Need to refactor.
+""" Currently the main module that runs everything.
 """
 
 import argparse
@@ -17,9 +15,8 @@ from report import Report
 
 
 def dir_exists(path):
-    """
-    Checks whether a directory exists.
-    If directory is not found, create the directory.
+    """ Checks whether a directory exists.
+        If directory is not found, create the directory.
     """
 
     if not os.path.exists(path):
@@ -28,7 +25,7 @@ def dir_exists(path):
 
 
 def check_dependencies():
-    """Check for required non-python dependencies."""
+    """ Check for required non-python dependencies. """
 
     if subprocess.call(["which", "wkhtmltopdf"], stdout=subprocess.DEVNULL) != 0:
         logging.critical("WKHTMLTOPDF not found, can not print to PDF")
@@ -39,14 +36,8 @@ def check_dependencies():
 
 
 def cli_arguments():
-    """Add cli arguments to argpase
-        
-        report:
-        --dev:
-        --pdf:
-        --html:
-
-        return arguments passed at runtie
+    """ Add cli arguments to argpase
+        return arguments passed at runtime
     """
 
     arg_parser = argparse.ArgumentParser(
@@ -67,7 +58,8 @@ def cli_arguments():
 
 
 def app_config(config_path):
-    # Load Application Config from file
+    """ Load Application Config from file """
+
     try:
         with open(config_path, "r", encoding="UTF-8") as file:
             config = safe_load(file)
@@ -78,7 +70,13 @@ def app_config(config_path):
 
 
 def main():
-    """Runs Main"""
+    """ 
+        --dev: runs all user generated content and logs in the current folder.
+                Otherwise, all user generated content is located at /var/opt/
+                and logs are located at /var/log/app
+
+        Refactor report generation to allow for Threading
+    """
 
     args = cli_arguments()
     config_path = "../config.yml"
@@ -109,11 +107,12 @@ def main():
 
     report = Report(
         name=args.report,
-        template_name = args.report,
-        to_pdf = args.pdf,
-        to_html = args.html
+        report_path=reports_path,
+        template_path = templates_path,
+        to_pdf=args.pdf,
+        to_html=args.html
     )
-
+    print(args.report)
     create_report(
         env=env,
         output_path=output_path,

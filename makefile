@@ -3,6 +3,7 @@ CC='pipenv run python3'
 template_dir = ./make_pdf/templates
 templates = $(shell ls $(template_dir))
 output_dir = ./output
+cwd = $(shell pwd)
 
 .PHONY: help
 help: ## Show this help
@@ -22,15 +23,16 @@ env:
 install:
 	pipenv install
 
+build:
+	sudo docker build -t jinja-templates .
+
+docker-run: build
+	sudo docker run --rm -v $(cwd)/src:/var/opt -v $(cwd)/src:/var/log/app jinja-templates
+
 initial: env install
 
 clean:	## empy the output folder
 	rm -rf $(output_dir)/*.pdf
 
-
 %: ## where the magic happens
-	@python3 -m src $@
-
-
-all: invest capital #make all reports
-	open output/invest.pdf $(output_dir)/capital.pdf
+	@cd src && python3 app.py --dev --html $@

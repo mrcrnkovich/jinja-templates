@@ -17,7 +17,7 @@ WORKDIR app
 RUN rm -rf src/output src/reports src/logs src/templates
 
 RUN pip install --upgrade pip &&\
-    pip install jinja2 pyyaml requests pdfkit
+    pip install -r requirements.txt
 
 WORKDIR src
 CMD ls /var/opt/reports | xargs -n 1 basename -s .yml | xargs -n 1 python app.py --html --pdf

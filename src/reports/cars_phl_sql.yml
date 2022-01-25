@@ -4,7 +4,7 @@ report:
     data:
       - source_id: table 
         source_type: sqlite3
-        source_path: './examples/sqlite3/phl_crash_data.db'
+        source_path: '/var/opt/examples/sqlite3/phl_crash_data.db'
         query: >-
           select crash_year,
             fatal,
@@ -13,7 +13,7 @@ report:
           from crash_by_year
       - source_id: text
         source_type: sqlite3
-        source_path: './examples/sqlite3/phl_crash_data.db'
+        source_path: '/var/opt/examples/sqlite3/phl_crash_data.db'
         query: >-
           select comments
           from commentary
