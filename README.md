@@ -44,6 +44,19 @@ For each model define:
     1. Jinja template name (inside template folder)
     2. Data: API endpoint or SQL query
     3. Other meta-data
+
+## Run in Docker
+
+A docker file is provided in the repo. Local access binding, or Docker Volumes
+are available for the following directories:
+    - reports:/var/opt/reports
+    - ouput:/var/opt/output/
+    - logs:/var/log/app
+    - templates:/var/opt/templates
+
+for example:
+
+    `docker run -v ~/opt:/var/opt -v ~/logs:/var/log/app jinja-templates`
     
 ### TO DO:
     1. Improve Logging
