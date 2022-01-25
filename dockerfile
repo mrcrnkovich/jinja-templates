@@ -7,6 +7,8 @@ RUN apt-get -qq update -y &&\
 
 WORKDIR home
 
+COPY requirements.txt .
+
 RUN wget https://github.com/mrcrnkovich/jinja-templates/archive/master.zip -q\ 
     && unzip master.zip\
     && rm -rf master.zip
@@ -16,7 +18,14 @@ WORKDIR app
 
 RUN rm -rf src/output src/reports src/logs src/templates
 
-RUN pip install --upgrade pip &&\
+RUN adduser --system jinjatemplates
+RUN chown -R jinjatemplates ./
+RUN chown -R jinjatemplates /var/opt/
+RUN chown -R jinjatemplates /var/log/
+
+USER jinjatemplates
+
+RUN python -m pip install --upgrade pip &&\
     pip install -r requirements.txt
 
 WORKDIR src
