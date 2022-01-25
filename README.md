@@ -56,10 +56,4 @@ are available for the following directories:
 
 for example:
 
-    `docker run -v ~/opt:/var/opt -v ~/logs:/var/log/app jinja-templates`
-    
-### TO DO:
-    1. Improve Logging
-    2. Include Error Handling
-    3. Write Py-Tests
-    4. Move methods out of Main, so the module can be imported and used in other Python programs
+    `docker run -v $(pwd):/var/opt -v $(pwd):/var/log/app jinja-templates`
