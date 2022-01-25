@@ -6,6 +6,7 @@ RUN apt-get -qq update -y &&\
 
 
 WORKDIR home
+COPY requirements.txt .
 
 RUN wget https://github.com/mrcrnkovich/jinja-templates/archive/master.zip -q\ 
     && unzip master.zip\
