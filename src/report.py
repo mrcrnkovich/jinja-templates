@@ -45,8 +45,8 @@ class Report:
         except FileNotFoundError as err:  # raise exception
             logging.fatal("No report configuration found, %s", err)
             sys.exit()
-
-        self.config = config
+        else:
+            self.config = config
 
 
     def load_data(self):
