@@ -13,6 +13,7 @@ import subprocess
 import jinja2
 from yaml import safe_load
 from create_report import create_report
+from report import Report
 
 
 def dir_exists(path):
@@ -31,12 +32,22 @@ def check_dependencies():
 
     if subprocess.call(["which", "wkhtmltopdf"], stdout=subprocess.DEVNULL) != 0:
         logging.critical("WKHTMLTOPDF not found, can not print to PDF")
+        return True
     else:
         logging.info("System Check: WKHTMLTOPDF Found")
+        return False
 
 
 def cli_arguments():
-    """Add cli args to argpase return results"""
+    """Add cli arguments to argpase
+        
+        report:
+        --dev:
+        --pdf:
+        --html:
+
+        return arguments passed at runtie
+    """
 
     arg_parser = argparse.ArgumentParser(
         description="A static report generator based on Jinja"
@@ -96,13 +107,17 @@ def main():
         autoescape=jinja2.select_autoescape(),
     )
 
+    report = Report(
+        name=args.report,
+        template_name = args.report,
+        to_pdf = args.pdf,
+        to_html = args.html
+    )
+
     create_report(
         env=env,
         output_path=output_path,
-        reports_path=reports_path,
-        report=args.report,
-        print_to_pdf=args.pdf,
-        print_to_html=args.html,
+        report=report,
         pdf_base_config=config.get("pdf"),
     )
 

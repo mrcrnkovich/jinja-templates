@@ -1,0 +1,7 @@
+test.html
+output/*
+src/output/*
+*.log
+**/*.pyc
+__pycache__
+**/*.db
