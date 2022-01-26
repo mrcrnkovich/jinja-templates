@@ -30,7 +30,7 @@ be incorporated into a Airflow routine, to be run after a batch data load.
 `--template: define a template to be used, do not look in the config.yml file`
 
 ### Default Templates
-There are three default templates included
+There are two default templates included
 with the package:
     1. Three panes (Top , bottom_left, bottm_right)
     2. Three panes (Left, top_right, bottom_right)
