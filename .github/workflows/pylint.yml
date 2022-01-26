@@ -26,4 +26,4 @@ jobs:
         pipenv run black . --target-version py310
     - name: Analysing the code with pylint
       run: |
-        pipenv run pylint $(find . -name "*.py" | xargs)
+        pipenv run pylint --disable="too-many-instance-attributes" $(find . -name "*.py" | xargs)
