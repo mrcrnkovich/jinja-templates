@@ -20,10 +20,10 @@ jobs:
         pip install --upgrade pipenv wheel
     - name: Install pipenv dependencies
       run: |
-        pipenv install
+        pip install -r requirements.txt
     - name: Format with Black
       run: |
-        pipenv run black . --target-version py310
+        black . --target-version py310
     - name: Analysing the code with pylint
       run: |
-        pipenv run pylint $(find . -name "*.py" | xargs)
+        pylint --disable="too-many-instance-attributes" $(find . -name "*.py" | xargs)

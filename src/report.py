@@ -1,13 +1,23 @@
+""" Report Class Module """
+
 import sys
 import logging
-from yaml import safe_load
+from typing import Any
 from dataclasses import dataclass, field
+from yaml import safe_load
 from router.data_router import handler
 
 
 @dataclass
 class Report:
+    """ Report Module with the following attributes:
+        - Name: Report's Name
+        - Config:
+    """
     name: str
+    config: dict = field(init=False)
+    data: Any = field(init=False)
+    data_sources: dict = field(init=False)
     report_path: str
     template_path: str
     template_name: str = field(init=False)
@@ -45,10 +55,13 @@ class Report:
         except FileNotFoundError as err:  # raise exception
             logging.fatal("No report configuration found, %s", err)
             sys.exit()
-
-        self.config = config
+        else:
+            self.config = config
 
 
     def load_data(self):
-        self.data = handler(self.data_sources)
+        """ Loads the data for the Report. Must be run after load_config """
 
+        if not self.data_sources:
+            logging.error("Data sources have not been loaded")
+        self.data = handler(self.data_sources)

@@ -6,6 +6,7 @@ RUN apt-get -qq update -y &&\
 
 
 WORKDIR home
+COPY requirements.txt .
 
 COPY requirements.txt .
 

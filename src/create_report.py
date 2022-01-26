@@ -27,8 +27,10 @@ def create_report(env, report: Report, output_path, pdf_base_config):
     if report.to_html:
         with open(f"{output_path}/{report.name}.html", "w", encoding="UTF-8") as file:
             file.write(html)
+            logging.info("%s HTML written to file %s", report.name, output_path)
     else:
         print(html)
 
     if report.to_pdf:
         from_string(html, f"{output_path}/{report.name}.pdf", options=pdf_base_config)
+        logging.info("%s PDF written to file %s", report.name, output_path)
