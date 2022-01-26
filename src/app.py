@@ -29,11 +29,11 @@ def check_dependencies():
 
     if subprocess.call(["which", "wkhtmltopdf"], stdout=subprocess.DEVNULL) != 0:
         logging.critical("WKHTMLTOPDF not found, can not print to PDF")
-        return True
+        status = True
     else:
         logging.info("System Check: WKHTMLTOPDF Found")
-        return False
-
+        status = False
+    return status
 
 def cli_arguments():
     """ Add cli arguments to argpase
@@ -70,7 +70,7 @@ def app_config(config_path):
 
 
 def main():
-    """ 
+    """
         --dev: runs all user generated content and logs in the current folder.
                 Otherwise, all user generated content is located at /var/opt/
                 and logs are located at /var/log/app
